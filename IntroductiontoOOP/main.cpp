@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#define STRUCT_POINT1
+#define delimeter "\n-----------------------------------\n"
 class Point
 {
 	double x;
@@ -23,18 +23,64 @@ public:
 	{
 		this->y = y;
 	}
-	double distance(double x, double y)  // meth
+	// constructors
+	Point()
 	{
-		double c1= this->x - x;
-		double c2 = this->y - y;
-		return (c1 * c1 + c2 * c2);
+		x = y = 0;
+		cout << "DefaultConstructor: \t" << this << endl;
+	}
+	Point(double x)
+	{
+		this->x = x;
+		this->y = 0;
+		cout << "Single argument constructor " << this << endl;
+	}
+	Point(double x,double y)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "constructor " << this << endl;
+	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "Copy constructor " << this << endl;
+	}
+	// DESTRUCTOR
+	~Point()
+	{
+		cout << "Destructor: \t" << this << endl;
+	}
+	// OPERATORS
+	Point& operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+	// methods
+	double distance(const Point& other)const  // meth
+	{
+		double c1= this->x - other.x;
+		double c2 = this->y - other.y;
+		return sqrt(c1 * c1 + c2 * c2);
+	}
+	void print()const
+	{
+		cout << this << ": " << "x = " << x << "\ty = " << y << endl;
 	}
 };
-       double distance(Point A, Point B); // func
+       double distance(const Point& A, const Point& B); 
+#define STRUCT_POINT
+#define DistanceCheck
+#define ConstructorsCheck
+#define AssignmentCheck
 
 void main()
 {
-#ifdef STRUCT_POINT
+#ifdef STRUCT_POINT1
 	setlocale(LC_ALL, "Russian");
 	int a; //  declartion of var 'a' with type 'int'
 	Point A; // declaration of var 'A' with type 'Point'
@@ -45,22 +91,53 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 	cout << sizeof(A) << endl; // 2 doubles  = 16 bytes
 	cout << sizeof(Point) << endl; // same with line higher  
-#endif // 
+#endif 
+#ifdef DistanceCheck1
 	Point A, B;
-	B.set_x(4);
-	B.set_y(0);
-	A.set_x(4);
+	B.set_x(7);
+	B.set_y(8);
+	A.set_x(2);
 	A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
+	cout << B.get_x() << "\t" << B.get_y() << endl;
+	cout << delimeter;
+	cout << A.distance(B) << endl;
+	cout << delimeter;
+	cout << B.distance(A) << endl;
 
-	cout << A.distance(0,0) << endl; 
-	cout << A.distance(B.get_x(), B.get_y()) << endl;
-
+	cout << delimeter;
 	cout << distance(A,B) << endl;
-	}
-double distance(Point A, Point B)
+	cout << delimeter;
+#endif
+#ifdef ConstuctorsCheck1
+	Point A;
+	A.print();
+	Point B = 5;
+	B.print();
+	Point C(2, 3);
+	C.print();
+	Point D = C; // copy constructor
+	D.print();
+#endif
+	//Point A(2, 3); //construcor
+	//Point B; //default constructor
+	//B = A; //operator Copy Assignment
+	//B.print();
+#ifdef AssignmentCheck
+    
+	Point A, B, C;
+	cout << delimeter;
+	A = B = C = Point(2, 3);
+	A.print();
+	B.print();
+	C.print();
+	cout << delimeter;
+#endif 
+
+}
+double distance(const Point& A,const Point& B)
 {
 	double x = A.get_x() - B.get_x();
 	double y = A.get_y() - B.get_y();
-	return (x * x + y * y);
+	return sqrt(x * x + y * y);
 }
