@@ -81,10 +81,11 @@ void print()const
 Fraction operator+(const Fraction& A, const Fraction& B);
 void main()
 {
-	Fraction A(4,3);
-	Fraction C = A + A;
-	C.simplify();
-	C.print();
+	Fraction A(-1,2000, 3000);
+	A.simplify();
+	A.print();
+	A.delint();
+	A.print();
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
 {
