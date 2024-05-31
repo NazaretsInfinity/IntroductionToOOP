@@ -70,8 +70,7 @@ void delint()
 void print()const
 {
 	if (intpart != 0)cout << intpart << " ";
-	if(num==0)cout << 0 << " " << this << endl;
-	else cout << num << "/" << den << " " <<  this << endl;
+	cout << num << "/" << den << " " <<  this << endl;
 }
 };
 Fraction operator+(const Fraction& A, const Fraction& B);
