@@ -23,7 +23,7 @@ public:
 	{
 		this->y = y;
 	}
-	// constructors
+	// CONSTRUCTORS
 	Point()
 	{
 		x = y = 0;
@@ -60,7 +60,20 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl;
 		return *this;
 	}
-	// methods
+	Point& operator++() // prefix increment
+	{
+		x++;
+		y++;
+		return *this;
+	}
+	Point operator++(int) //postfix(suffix) increment
+	{
+		Point old = *this;
+		x++;
+		y++;
+		return old;
+	}
+	// METHODS
 	double distance(const Point& other)const  // meth
 	{
 		double c1= this->x - other.x;
@@ -72,11 +85,16 @@ public:
 		cout << this << ": " << "x = " << x << "\ty = " << y << endl;
 	}
 };
-       double distance(const Point& A, const Point& B); 
+Point operator+(const Point& A, const Point& B);
+Point operator-(const Point& A, const Point& B);
+Point operator*(const Point& A, const Point& B);
+bool operator==(const Point& A, const Point& B);
+double distance(const Point& A, const Point& B); 
 #define STRUCT_POINT
 #define DistanceCheck
 #define ConstructorsCheck
 #define AssignmentCheck
+#define operatorsARIPHMETICALcheck
 
 void main()
 {
@@ -123,7 +141,7 @@ void main()
 	//Point B; //default constructor
 	//B = A; //operator Copy Assignment
 	//B.print();
-#ifdef AssignmentCheck
+#ifdef AssignmentCheck1
     
 	Point A, B, C;
 	cout << delimeter;
@@ -133,7 +151,18 @@ void main()
 	C.print();
 	cout << delimeter;
 #endif 
-
+#ifdef operatorsARIPHMETICALcheck1
+	Point A(2, 3);
+	Point B(7, 8);
+	Point C = A * B;
+	C.print();
+	A.print();
+	B.print();
+	C++;
+	C.print();
+#endif
+	//cout << (2 == 3);
+	cout << (Point(2,3) == Point(2,3)) << delimeter;
 }
 double distance(const Point& A,const Point& B)
 {
@@ -141,3 +170,29 @@ double distance(const Point& A,const Point& B)
 	double y = A.get_y() - B.get_y();
 	return sqrt(x * x + y * y);
 }
+Point operator+(const Point& A, const Point& B)
+{
+	Point result;
+	result.set_x(A.get_x() + B.get_x());
+	result.set_y( A.get_y() + B.get_y());
+	return result;
+}
+Point operator-(const Point& A, const Point& B)
+{
+	//return Point(A.get_x() - B.get_x(), A.get_y() - B.get_y());
+	Point result
+	(
+		A.get_x() - B.get_x(),
+		A.get_y() - B.get_y()
+	);
+	return result;
+}
+Point operator*(const Point& A, const Point& B)
+{
+	return Point(A.get_x() * B.get_x(), A.get_y() * B.get_y());
+}
+bool operator==(const Point& A, const Point& B)
+{
+	return A.get_x() == B.get_x() && A.get_y();;
+}
+
