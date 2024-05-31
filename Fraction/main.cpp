@@ -39,6 +39,13 @@ Fraction(int intpart, int numenator, int denominator)
 	else this->den = denominator;
 	cout << "Constructor: \t" << this << endl;
 }
+Fraction(const Fraction& other)
+{
+	this->intpart = other.intpart;
+	this->num = other.num;
+	this->den = other.den;
+	cout << "CopyConstructor: \t" << this << endl;
+}
          //DESTRUCTOR
 ~Fraction()
 {
@@ -63,15 +70,17 @@ void delint()
 void print()const
 {
 	if (intpart != 0)cout << intpart << " ";
-	cout << num << "/" << den << " " <<  this << endl;
+	if(num==0)cout << 0 << " " << this << endl;
+	else cout << num << "/" << den << " " <<  this << endl;
 }
 };
 Fraction operator+(const Fraction& A, const Fraction& B);
 void main()
 {
-	Fraction A(0,-2000, 3000);
+	Fraction A(2,2, 3);
+	Fraction B = A;
 	A.simplify();
-	A.print();
+	B.print();
 	A.delint();
 	A.print();
 }
