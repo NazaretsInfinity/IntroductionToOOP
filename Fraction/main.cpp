@@ -23,21 +23,9 @@ int getINT()const
           // CONSTRUCTOR
 Fraction()
 {
-    	intpart = 0;
-		num = den = 1;
+    	intpart = num = 0;
+		den = 1;
 		cout << "DefaultConstructor: \t" << this << endl;
-}
-Fraction(int numenator, int denominator)
-{
-	intpart = 0;
-	this->num = numenator;
-	if (denominator == 0)
-	{
-		cout << this << ": Can't have 0 as a denominator" << endl;
-		this->den = 1;
-	}
-	else this->den = denominator;
-	cout << "Constructor(No interger): " << this << endl;
 }
 Fraction(int intpart, int numenator, int denominator)
 {
@@ -81,7 +69,7 @@ void print()const
 Fraction operator+(const Fraction& A, const Fraction& B);
 void main()
 {
-	Fraction A(-1,2000, 3000);
+	Fraction A(0,-2000, 3000);
 	A.simplify();
 	A.print();
 	A.delint();
