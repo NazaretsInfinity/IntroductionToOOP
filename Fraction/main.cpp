@@ -215,11 +215,11 @@ void main()
 	B.print();
 #endif
 	
-	Fraction A(1,2,3);
+	Fraction A(-1,2,3);
 	Fraction B(2,3);
 	A.print();
 	B.print();
-	cout << (A != B) << endl;
+	cout << (A<=B) << endl;
 	//A.print();
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
@@ -266,5 +266,5 @@ bool operator>=(const Fraction& A, const Fraction& B)
 }
 bool operator<=(const Fraction& A, const Fraction& B)
 {
-	return A < B || A == B;
+	return B >= A;
 }
