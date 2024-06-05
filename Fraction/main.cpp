@@ -158,6 +158,10 @@ Fraction operator++(int)
 	intpart++;
 	return old;
 }
+//{
+//	in >> intpart >> num >> den;
+//	return cin;
+//}
 Fraction& operator--()
 {
 	if (intpart != 0)intpart--;
@@ -198,8 +202,7 @@ bool operator<(const Fraction& A, const Fraction& B);
 bool operator>=(const Fraction& A, const Fraction& B);
 bool operator<=(const Fraction& A, const Fraction& B);
 std::ostream& operator << (std::ostream& cout, const Fraction& obj);
-std::istream& operator >> (std::istream& cin, Fraction& obj);
-
+std::istream& operator >> (std::istream& in , Fraction& obj);
 void main()
 {
 #define ConstructorCheck
@@ -246,6 +249,9 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 }
 std::istream& operator >> (std::istream& cin, Fraction& obj)
 {
+	/*int a, b, c; char slash;
+	cin >> a >> b >> slash >> c;
+	obj.setINT(a); obj.setNUM(b); obj.setDEN(c);*/
    return cin;
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
