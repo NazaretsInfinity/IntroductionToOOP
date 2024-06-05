@@ -1,5 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 using namespace std;
+//:: -  scope operator(оператор разрешения видимости) - позволяет "зайти" в пространство имён
+//namespace( пространство имён) как папка, а имя, расположенное в нём - как файл.
+// сам по себе :: выводит нас в Global scope(глобальное пространство имён)
+// cout - console out ; cin 
 #define delimeter "\n-----------------------------------\n"
 class Fraction;
 Fraction operator*(Fraction A, Fraction B);
@@ -202,7 +207,7 @@ bool operator<(const Fraction& A, const Fraction& B);
 bool operator>=(const Fraction& A, const Fraction& B);
 bool operator<=(const Fraction& A, const Fraction& B);
 std::ostream& operator << (std::ostream& cout, const Fraction& obj);
-std::istream& operator >> (std::istream& in , Fraction& obj);
+std::istream& operator >> (std::istream& in ,Fraction& obj);
 void main()
 {
 #define ConstructorCheck
@@ -235,7 +240,7 @@ void main()
 
 	Fraction A(2,3,4);
 	cout << "Enter your fraction: "; cin >> A;
-	cout << A << endl;
+	cout << "Fraction: " << A << endl;
 }
 std::ostream& operator << (std::ostream& os, const Fraction& obj)
 {
@@ -248,12 +253,25 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 	}
 	return os;
 }
-std::istream& operator >> (std::istream& in, Fraction& obj)
+std::istream& operator >> (std::istream& is,  Fraction& obj)
 {
-	/*int a, b, c; char slash;
-	cin >> a >> b >> slash >> c;
-	obj.setINT(a); obj.setNUM(b); obj.setDEN(c);*/
-	return in;
+	const int SIZE = 64;
+	char buffer[SIZE]{};
+	//is >> buffer; instead the line lower.
+	is.getline(buffer, SIZE); // this one
+	int number[3];
+	int n = 0;
+	const char delimiters[] = "(/)+ ";
+	for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+		number[n++] = atoi(pch);
+	for (int i = 0; i < n; i++)cout << number[i] << " "; cout << endl;
+	switch (n)
+	{
+	    case 1: obj = Fraction(number[0]); break;
+		case 2: obj = Fraction(number[0], number[1]); break;
+		case 3: obj = Fraction(number[0], number[1],number[2]); break;
+	}
+	return is;
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
 {
