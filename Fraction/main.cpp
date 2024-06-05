@@ -1,6 +1,10 @@
 #include<iostream>
 using namespace std;
 #define delimeter "\n-----------------------------------\n"
+class Fraction;
+Fraction operator*(Fraction A, Fraction B);
+Fraction operator+(const Fraction& A, const Fraction& B);
+Fraction operator/(const Fraction& A, Fraction B);
 class Fraction
 {
 	int intpart;
@@ -85,6 +89,23 @@ void simplify()
 			break;
 		}
 }
+Fraction& reduce()
+{
+	int more, less, rest;
+	if (num < den)more = num,less = den;
+	else more = den,less = num;
+
+	do 
+	{
+		rest = more % less;
+		more = less;
+		less = rest;
+	} while (rest);
+	int GSD = more; // gsd - greatest common divisor
+	num /= GSD;
+	den /= GSD;
+	return* this;
+}
 Fraction& to_improper()
 {
 	num = intpart * den+(intpart >= 0? num:-num);
@@ -152,10 +173,7 @@ Fraction& operator--(int)
 }
 Fraction& operator+=(const Fraction& other)
 {
-	this->intpart += other.intpart;
-	this->num = num * other.den + other.num * den;
-	this->den *= other.den;
-	return *this;
+	return *this = *this + other;
 }
 Fraction& operator-=(Fraction other)
 {
@@ -164,32 +182,29 @@ Fraction& operator-=(Fraction other)
 	this->den *= other.den;
 	return *this;
 }
-Fraction& operator*=(Fraction other)
+Fraction& operator*=(const Fraction& other)
 {
-	this->to_improper(); other.to_improper();
-	num *= other.num;
-	den *= other.den;
-	return *this;
+	return *this = *this * other;
 }
-Fraction& operator/=(Fraction other)
+Fraction& operator/=(const Fraction& other)
 {
-	*this *= other.inverted();
-	return *this;
+	return *this = *this / other;
 }
 };
-#define ConstructorCheck
-#define OperatorCheck
-Fraction operator+(const Fraction& A, const Fraction& B);
-Fraction operator*(Fraction A,Fraction B);
-Fraction operator/(const Fraction& A,Fraction B);
 bool operator==(const Fraction& A, const Fraction& B);
 bool operator!=(const Fraction& A, const Fraction& B);
 bool operator>(const Fraction& A, const Fraction& B);
 bool operator<(const Fraction& A, const Fraction& B);
 bool operator>=(const Fraction& A, const Fraction& B);
 bool operator<=(const Fraction& A, const Fraction& B);
+std::ostream& operator << (std::ostream& cout, const Fraction& obj);
+std::istream& operator >> (std::istream& cin, Fraction& obj);
+
 void main()
 {
+#define ConstructorCheck
+#define OperatorCheck
+
 #ifdef ConstructorCheck1
 	setlocale(LC_ALL, "");
 	Fraction A;
@@ -205,22 +220,33 @@ void main()
 	F.print();
 #endif
 #ifdef OperatorCheck1
-	Fraction A(2, 3, 4);
-	A.print();
-	Fraction B(3, 4, 5);
-	B.print();
-	Fraction C = A + B;
-	C.print();
-	A.print();
-	B.print();
-#endif
-	
 	Fraction A(-1,2,3);
-	Fraction B(2,3);
+	Fraction B(1,3);
 	A.print();
 	B.print();
-	cout << (A<=B) << endl;
-	//A.print();
+	A *= B;
+    A /= B;
+	A.reduce();
+	A.print();
+#endif
+	Fraction A(2,3,4);
+	cout << "Enter your fraction: "; cin >> A;
+	cout << A << endl;
+}
+std::ostream& operator << (std::ostream& os, const Fraction& obj)
+{
+	if (obj.getINT())os << obj.getINT();
+	if (obj.getNUM())
+	{
+		if (obj.getINT())os << "(";
+		os << obj.getNUM() << "/" << obj.getDEN();
+		if (obj.getINT())os << ")";
+	}
+	return os;
+}
+std::istream& operator >> (std::istream& cin, Fraction& obj)
+{
+   return cin;
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
 {
@@ -262,9 +288,11 @@ bool operator<(const Fraction& A, const Fraction& B)
 }
 bool operator>=(const Fraction& A, const Fraction& B)
 {
-	return A > B || A == B;
+	return !(A > B);
+	//return A > B || A == B;
 }
 bool operator<=(const Fraction& A, const Fraction& B)
 {
-	return B >= A;
+	return !(A < B);
+	//return B >= A;
 }
