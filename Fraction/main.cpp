@@ -232,6 +232,7 @@ void main()
 	A.reduce();
 	A.print();
 #endif
+
 	Fraction A(2,3,4);
 	cout << "Enter your fraction: "; cin >> A;
 	cout << A << endl;
@@ -247,12 +248,12 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 	}
 	return os;
 }
-std::istream& operator >> (std::istream& cin, Fraction& obj)
+std::istream& operator >> (std::istream& in, Fraction& obj)
 {
 	/*int a, b, c; char slash;
 	cin >> a >> b >> slash >> c;
 	obj.setINT(a); obj.setNUM(b); obj.setDEN(c);*/
-   return cin;
+	return in;
 }
 Fraction operator+(const Fraction& A, const Fraction& B)
 {
@@ -295,10 +296,8 @@ bool operator<(const Fraction& A, const Fraction& B)
 bool operator>=(const Fraction& A, const Fraction& B)
 {
 	return !(A > B);
-	//return A > B || A == B;
 }
 bool operator<=(const Fraction& A, const Fraction& B)
 {
 	return !(A < B);
-	//return B >= A;
 }
