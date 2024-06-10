@@ -5,7 +5,7 @@ using namespace std;
 class String
 {
 	int size; //size of string in Bytes
-	char* str; //adress of string in dynamic memory
+	char* str; //address of string in dynamic memory
 public:
 String(int size = 80)
 {
@@ -48,11 +48,10 @@ void main()
 	setlocale(LC_ALL, "Russian");
 	String str1 = "Hello";
 	String str2 = "World";
-	String str3 = " Love u!";
 	cout << str1 << endl;
 	cout << str2 << endl;
 
-	String str = str1 + str2 + str3;
+	String str = str1 + str2;
 	cout << str << endl;
 }
 std::ostream& operator << (std::ostream& os, const String& obj)
