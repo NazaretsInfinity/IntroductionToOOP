@@ -48,9 +48,12 @@ void main()
 	setlocale(LC_ALL, "Russian");
 	String str1 = "Hello";
 	String str2 = "World";
+	String str3 = " Love u!";
 	cout << str1 << endl;
 	cout << str2 << endl;
-	String str3 = str1 + str2;
+
+	String str = str1 + str2 + str3;
+	cout << str << endl;
 }
 std::ostream& operator << (std::ostream& os, const String& obj)
 {

@@ -68,8 +68,20 @@ public:
 	Fraction(double intpart)
 	{
 		this->intpart = intpart;
-		num=1, den = 1;
-
+		int bden = 10;
+		while (true)
+		{
+			double buff = intpart;
+			buff = int(buff * bden);
+			buff /= bden;
+			if (intpart - buff == 0)
+			{
+				den = bden; 
+				num = (intpart - this->intpart) * bden;
+				break;
+			}
+			else bden*=10;
+		}
 	}
 	Fraction(int intpart, int numenator, int denominator)
 	{
@@ -265,7 +277,7 @@ void main()
 	cout << a << endl;
 #endif 
 #ifdef conversionTask
-	Fraction B = 2.75345;
+	Fraction B = 2.75;
 	cout << B << endl;
 #endif
 }
