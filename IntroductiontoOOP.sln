@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntroductiontoOOP", "Introd
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fraction.vcxproj", "{4DE3ADF0-734E-41B9-8781-16D2550E6114}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{33E5D051-31FB-4882-B7A6-D763C405F32C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{4DE3ADF0-734E-41B9-8781-16D2550E6114}.Release|x64.Build.0 = Release|x64
 		{4DE3ADF0-734E-41B9-8781-16D2550E6114}.Release|x86.ActiveCfg = Release|Win32
 		{4DE3ADF0-734E-41B9-8781-16D2550E6114}.Release|x86.Build.0 = Release|Win32
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Debug|x64.ActiveCfg = Debug|x64
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Debug|x64.Build.0 = Debug|x64
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Debug|x86.ActiveCfg = Debug|Win32
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Debug|x86.Build.0 = Debug|Win32
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Release|x64.ActiveCfg = Release|x64
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Release|x64.Build.0 = Release|x64
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Release|x86.ActiveCfg = Release|Win32
+		{33E5D051-31FB-4882-B7A6-D763C405F32C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
