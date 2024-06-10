@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define _USE_MATH_DEFINES
 #include<iostream>
 using namespace std; 
 #define delimeter "\n-----------------------------------\n"
@@ -60,6 +61,16 @@ public:
 		num = 0;
 		den = 1;;
 		cout << "Constructor(NoFraction): \t" << this << endl;
+	}
+	Fraction(double decimal)
+	{
+		decimal += 1e-10;
+		intpart = decimal;
+		decimal -= intpart;
+		den = 1e+9;
+		num = decimal * den;
+		//this->reduce();
+		cout << "constructor:\t " << this << endl;
 	}
 	Fraction(int intpart, int numenator, int denominator)
 	{
@@ -248,14 +259,14 @@ void main()
 	cout << dbldelimeter;
 	cout << B;
 #endif 
-#ifdef conversionTask
+#ifdef conversionTask1
 	Fraction A(2,3,4);
 	cout << A << endl;
 	double a = A;
 	cout << a << endl;
 #endif 
 #ifdef conversionTask2
-	Fraction B = 23.7555;
+	Fraction B = 3.10001;
 	cout << B << endl;
 #endif
 }
