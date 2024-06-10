@@ -1,10 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-using namespace std;
-//:: -  scope operator(оператор разрешения видимости) - позволяет "зайти" в пространство имён
-//namespace(пространство имён) как папка, а имя, расположенное в нём - как файл.
-// сам по себе :: выводит нас в Global scope(глобальное пространство имён)
-// cout - console out ; cin - console in 
+using namespace std; 
 #define delimeter "\n-----------------------------------\n"
 #define dbldelimeter "\n==================================\n"
 class Fraction;
@@ -64,24 +60,6 @@ public:
 		num = 0;
 		den = 1;;
 		cout << "Constructor(NoFraction): \t" << this << endl;
-	}
-	Fraction(double intpart)
-	{
-		this->intpart = intpart;
-		int bden = 10;
-		while (true)
-		{
-			double buff = intpart;
-			buff = int(buff * bden);
-			buff /= bden;
-			if (intpart - buff == 0)
-			{
-				den = bden; 
-				num = (intpart - this->intpart) * bden;
-				break;
-			}
-			else bden*=10;
-		}
 	}
 	Fraction(int intpart, int numenator, int denominator)
 	{
@@ -270,14 +248,14 @@ void main()
 	cout << dbldelimeter;
 	cout << B;
 #endif 
-#ifdef conversionTask1
+#ifdef conversionTask
 	Fraction A(2,3,4);
 	cout << A << endl;
 	double a = A;
 	cout << a << endl;
 #endif 
-#ifdef conversionTask
-	Fraction B = 2.75;
+#ifdef conversionTask2
+	Fraction B = 23.7555;
 	cout << B << endl;
 #endif
 }
