@@ -17,7 +17,7 @@ String(const char arr[])
 {
 	int i = 0;
 	while(arr[i] != '\0')i++;
-	size = ++i;
+	size = i;
 	this->str = new char[size];
 	for (int i = 0; i < size; i++)str[i] = arr[i];
 }
