@@ -61,7 +61,7 @@ int** get_arr()const
 	}
 	void transpose()
 	{
-		int buff = rows; // switch sizes
+		int buff = rows; 
 		rows = cols;
 		cols = buff;
 		int** res = new int* [rows];
@@ -70,7 +70,7 @@ int** get_arr()const
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)res[i][j] = arr[j][i];
 
-        for (int i = 0; i < rows; i++)delete[] arr[i];
+        for (int i = 0; i < cols; i++)delete[] arr[i];
 		delete[] arr;
 		arr = res;
 	}
@@ -120,10 +120,11 @@ void main()
 	Matrix C = A*B;
 	cout << C << endl;
 #endif
-	Matrix A(4, 2); A.fillrand(); 
+	Matrix A(2,3); A.fillrand(); 
 	cout << A << endl;
 	A.transpose();
 	cout << A << endl;
+
 }
 Matrix operator+(const Matrix& A, const Matrix& B)
 {
