@@ -20,24 +20,24 @@ public:
 	{
 		return size;
 	}
-	explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char[size]{})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size; defined upper
+		//this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char arr[])
+	String(const char arr[]) : size(strlen(arr) + 1), str(new char[size]{})
 	{
-		this->size = strlen(arr) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(arr) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; arr[i]; i++)str[i] = arr[i];
 		cout << "Constructor:\t\t" << this << endl;
 	}
 	//COPY CONSTRUCTOR
-	String(const String& other)
+	String(const String& other): size(other.size), str(new char[size]{})
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i<size; i++)str[i] = other.str[i];
 		cout << "CopyConstructor:\t\t" << this << endl;
 	}
@@ -53,7 +53,7 @@ public:
 		cout << "Size:\t" << size <<"\t";
 		cout << "Str:\t" << str << "\t";
 		cout << "Addr:\t" << &str <<"\t";
-		cout << endl;
+		cout << "\n\n";
 	}
 	// OPERATORS
 	String& operator=(const String& other)
@@ -69,11 +69,32 @@ public:
 };
 String operator+(const String& str1, const String& str2);
 std::ostream& operator << (std::ostream& os, const String& obj);
+
+#define cat_check
+#define constructorCheck
 void main()
 {
-#define checking
+#ifdef constructorCheck
+	String str1; //default constructor
+	str1.print();
 
-#ifdef checking
+	String str2(8); // single argument constructor( default actually for this code)
+	str2.print();
+
+	String str3 = "Hello";// single argument constructor(take array as prmtr)
+	str3.print();
+
+	String str4(); // function , not object because of (). Takes no prmtrs, yet return object of type String
+	
+
+	String str5{}; // explicit call of default constructor
+	str5.print();
+
+	String str6{ str3 }; // Copy constructor
+
+#endif
+
+#ifdef cat_check1
 	setlocale(LC_ALL, "Russian");
 	String str1 = "Hello";
 	String str2 = "World";
