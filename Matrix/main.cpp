@@ -21,7 +21,7 @@ int** get_arr()const
 		return arr;
 }
 	//CONSTRUCTORS;
-	Matrix(int rows = 2, int cols = 2)
+	Matrix(int rows = 1, int cols = 1)
 {
     this->rows = rows; this->cols = cols;
     arr = new int*[rows];
@@ -113,21 +113,17 @@ std::istream& operator >>(std::istream& is, Matrix& obj)
 void main()
 {
 #define checking
-#ifdef checking1
-	Matrix A(2,3); Matrix B(3,2); 
+#ifdef checking
+	Matrix A(2,3); Matrix B(2,2); 
 	cout << "Enter Matrix A: "; cin >> A;
 	cout << "Enter Matrix B: "; cin >> B;
 	Matrix C = A*B;
 	cout << C << endl;
 #endif
-	Matrix A(2,3); A.fillrand(); 
-	cout << A << endl;
-	A.transpose();
-	cout << A << endl;
-
 }
 Matrix operator+(const Matrix& A, const Matrix& B)
 {
+	if (A.get_rows() != B.get_rows() || A.get_cols()!=B.get_cols()) return Matrix();
 	Matrix res(A.get_rows(), A.get_cols());
 	for (int i = 0; i < A.get_rows(); i++)
 		for (int j = 0; j < A.get_cols(); j++)res.get_arr()[i][j] = A.get_arr()[i][j] + B.get_arr()[i][j];
@@ -135,6 +131,7 @@ Matrix operator+(const Matrix& A, const Matrix& B)
 }
 Matrix operator-(const Matrix& A, const Matrix& B)
 {
+	if (A.get_rows() != B.get_rows() || A.get_cols() != B.get_cols()) return Matrix();
 	Matrix res(A.get_rows(), A.get_cols());
 	for (int i = 0; i < A.get_rows(); i++)
 		for (int j = 0; j < A.get_cols(); j++)res.get_arr()[i][j] = A.get_arr()[i][j] - B.get_arr()[i][j];
@@ -142,6 +139,7 @@ Matrix operator-(const Matrix& A, const Matrix& B)
 }
 Matrix operator*(const Matrix& A, const Matrix& B)
 {
+	if (A.get_cols() != B.get_rows())return Matrix();
 	Matrix res(A.get_rows(), B.get_cols());
 	for (int j = 0; j < A.get_rows(); j++)
 	{
