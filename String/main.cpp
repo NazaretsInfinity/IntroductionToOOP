@@ -26,7 +26,7 @@ public:
 		//this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char arr[]) : size(strlen(arr) + 1), str(new char[size]{})
+	String(const char arr[]) : String(strlen(arr)+1)
 	{
 		//this->size = strlen(arr) + 1;
 		//this->str = new char[size] {};
@@ -34,11 +34,11 @@ public:
 		cout << "Constructor:\t\t" << this << endl;
 	}
 	//COPY CONSTRUCTOR
-	String(const String& other): size(other.size), str(new char[size]{})
+	String(const String& other): String(other.str) // we have this so we don't need code lower(except cout, oc)
 	{
 		//this->size = other.size;
 		//this->str = new char[size] {};
-		for (int i = 0; i<size; i++)str[i] = other.str[i];
+		//for (int i = 0; i<size; i++)str[i] = other.str[i];
 		cout << "CopyConstructor:\t\t" << this << endl;
 	}
 	~String()
