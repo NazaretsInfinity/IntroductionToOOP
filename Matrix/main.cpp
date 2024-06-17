@@ -28,6 +28,7 @@ int** get_arr()const
     for (int i = 0; i < rows; i++)arr[i] = new int[cols] {};
     cout << "DefaultConstructor:\t" << this << endl;
 }
+	//COPY CONSTRUCTOR
 	Matrix(const Matrix& other)
 {
 	this->rows = other.rows;
@@ -56,7 +57,22 @@ int** get_arr()const
 	void fillrand()
 	{
 		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)arr[i][j] = rand()%1000;
+			for (int j = 0; j < cols; j++)arr[i][j] = rand()%100;
+	}
+	void transpose()
+	{
+		int buff = rows; // switch sizes
+		rows = cols;
+		cols = buff;
+		int** res = new int* [rows];
+		for (int i = 0; i < rows; i++)res[i] = new int[cols];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)res[i][j] = arr[j][i];
+
+        for (int i = 0; i < rows; i++)delete[] arr[i];
+		delete[] arr;
+		arr = res;
 	}
 	//OPERATORS
 	Matrix& operator =(const Matrix& B)
@@ -96,11 +112,18 @@ std::istream& operator >>(std::istream& is, Matrix& obj)
 }
 void main()
 {
-	Matrix A(2,2); Matrix B(2,2); 
+#define checking
+#ifdef checking1
+	Matrix A(2,3); Matrix B(3,2); 
 	cout << "Enter Matrix A: "; cin >> A;
 	cout << "Enter Matrix B: "; cin >> B;
-	Matrix C = A * B;
+	Matrix C = A*B;
 	cout << C << endl;
+#endif
+	Matrix A(4, 2); A.fillrand(); 
+	cout << A << endl;
+	A.transpose();
+	cout << A << endl;
 }
 Matrix operator+(const Matrix& A, const Matrix& B)
 {
@@ -118,13 +141,13 @@ Matrix operator-(const Matrix& A, const Matrix& B)
 }
 Matrix operator*(const Matrix& A, const Matrix& B)
 {
-	Matrix res(A.get_cols(), B.get_rows());
+	Matrix res(A.get_rows(), B.get_cols());
 	for (int j = 0; j < A.get_rows(); j++)
 	{
 		for (int k = 0; k < B.get_cols(); k++)
 		{
 			int buff = 0;
-			for (int i = 0; i < A.get_rows(); i++)buff += A.get_arr()[j][i] * B.get_arr()[i][k];
+			for (int i = 0; i < A.get_cols(); i++)buff += A.get_arr()[j][i] * B.get_arr()[i][k];
 			res.get_arr()[j][k] = buff;
 		}
 	}
