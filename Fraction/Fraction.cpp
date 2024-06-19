@@ -32,18 +32,15 @@ Fraction::Fraction() : intpart(0), num(0), den(1)
 {
 	cout << "DefaultConstructor: \t" << this << endl;
 }
-Fraction::Fraction(int numenator, int denominator)
+Fraction::Fraction(int numenator, int denominator) 
 {
 	intpart = 0;
 	num = numenator;
 	this->setDEN(denominator);
 	cout << "Constructor(NoInteger): \t" << this << endl;
 }
-Fraction::Fraction(int intpart)
+Fraction::Fraction(int intpart) : intpart(intpart), num(0), den(1)
 {
-	this->intpart = intpart;
-	num = 0;
-	den = 1;;
 	cout << "Constructor(NoFraction): \t" << this << endl;
 }
 Fraction::Fraction(double decimal)
