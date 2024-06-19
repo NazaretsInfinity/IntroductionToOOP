@@ -56,7 +56,7 @@ Fraction::Fraction(double decimal)
 	decimal -= intpart;
 	den = 1e+9;
 	num = decimal * den;
-	//this->reduce();
+	this->reduce();
 	cout << "constructor:\t " << this << endl;
 }
 Fraction::Fraction(int intpart, int numenator, int denominator)

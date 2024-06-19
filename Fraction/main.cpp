@@ -1,9 +1,8 @@
 #include<iostream>
 #include"Fraction.h"
 using namespace std; 
-using::std::cout;
-using::std::cin;
-
+#define delimeter "\n-----------------------------------\n"
+#define dbldelimeter "\n==================================\n"
 void main()
 {
 #define ConstructorCheck
@@ -24,7 +23,6 @@ void main()
 	Fraction D(2, 3, 4);
 	D.print();
 	Fraction F(2, 5);
-	F.selint();
 	F.print();
 #endif
 #ifdef OperatorCheck1
@@ -61,12 +59,4 @@ void main()
 	Fraction B = 3.10001;
 	cout << B << endl;
 #endif
-	Fraction A;
-	cout << A << endl;
-
-	Fraction B(2, 3);
-	cout << B << endl;
-
-	Fraction C(2, 3, 4);
-	cout << C << endl;
 }

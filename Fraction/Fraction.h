@@ -1,8 +1,6 @@
 #pragma once
 #include<iostream>
 using namespace std;
-#define delimeter "\n-----------------------------------\n"
-#define dbldelimeter "\n==================================\n"
 class Fraction;
 Fraction operator*(Fraction A, Fraction B);
 Fraction operator+(const Fraction& A, const Fraction& B);
