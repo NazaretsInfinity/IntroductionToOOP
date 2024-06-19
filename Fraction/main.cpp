@@ -59,6 +59,4 @@ void main()
 	Fraction B = 3.10001;
 	cout << B << endl;
 #endif
-	Fraction A;
-	cout << A << endl;
 }
