@@ -28,11 +28,8 @@ void Fraction::setINT(int intpart)
 	this->intpart = intpart;
 }
 // CONSTRUCTOR
-Fraction::Fraction()
+Fraction::Fraction() : intpart(0), num(0), den(1)
 {
-	intpart = 0;
-	num = 0;
-	den = 1;
 	cout << "DefaultConstructor: \t" << this << endl;
 }
 Fraction::Fraction(int numenator, int denominator)

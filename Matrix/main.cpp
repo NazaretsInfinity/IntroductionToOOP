@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-
 class Matrix
 {
 	int rows;
@@ -21,22 +20,17 @@ int** get_arr()const
 		return arr;
 }
 	//CONSTRUCTORS;
-	Matrix(int rows = 1, int cols = 1)
+	Matrix(int rows = 1, int cols = 1) : rows(rows), cols(cols), arr(new int*[rows])
 {
-    this->rows = rows; this->cols = cols;
-    arr = new int*[rows];
     for (int i = 0; i < rows; i++)arr[i] = new int[cols] {};
     cout << "DefaultConstructor:\t" << this << endl;
 }
 	//COPY CONSTRUCTOR
-	Matrix(const Matrix& other)
+	Matrix(const Matrix& other) : Matrix(other.rows,other.cols)
 {
-	this->rows = other.rows;
-	this->cols = other.cols;
-	arr = new int* [rows];
-	for (int i = 0; i < rows; i++)arr[i] = new int[cols];
 	for (int i = 0; i < rows; i++)
 	for (int j = 0; j < cols; j++)arr[i][j] = other.arr[i][j];
+	cout << "CopyConstructor:\t" << this << endl;
 }
     // DESTRUCTOR
 	~Matrix()
@@ -59,7 +53,7 @@ int** get_arr()const
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)arr[i][j] = rand()%100;
 	}
-	void transpose()
+	Matrix& transpose()
 	{
 		int buff = rows; 
 		rows = cols;
@@ -73,6 +67,7 @@ int** get_arr()const
         for (int i = 0; i < cols; i++)delete[] arr[i];
 		delete[] arr;
 		arr = res;
+		return *this;
 	}
 	//OPERATORS
 	Matrix& operator =(const Matrix& B)
@@ -113,7 +108,7 @@ std::istream& operator >>(std::istream& is, Matrix& obj)
 void main()
 {
 #define checking
-#ifdef checking
+#ifdef checking1
 	Matrix A(2,3); Matrix B(2,2); 
 	cout << "Enter Matrix A: "; cin >> A;
 	cout << "Enter Matrix B: "; cin >> B;
