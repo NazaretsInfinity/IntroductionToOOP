@@ -73,8 +73,7 @@ int** get_arr()const
 	Matrix& operator =(const Matrix& B)
 	{
 		if (this == &B) return *this;
-		for (int i = 0; i < rows; i++)delete[] arr[i];
-		delete[] arr;
+		this->~Matrix();
 		this->rows  = B.rows;
 		this->cols = B.cols;
 		arr = new int* [rows];
