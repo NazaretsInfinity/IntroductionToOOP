@@ -33,6 +33,11 @@ public:
 		for (int i = 0; arr[i]; i++)str[i] = arr[i];
 		cout << "Constructor:\t\t" << this << endl;
 	}
+	String(String&& other): size(other.size), str(other.str)
+	{
+		other.str = nullptr;
+		cout << "MoveConstructor:\t" << this << endl;
+	}
 	//COPY CONSTRUCTOR
 	String(const String& other)
 	{
@@ -66,14 +71,25 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl;
 		return *this;
 	}
+	// MoveAssignment
+	String& operator=(String&& other)
+	{
+		if (this == &other) return *this;
+		delete[] str;
+		this->size = other.size;
+		this->str = new char[size] {};
+		for (int i = 0; other.str[i]; i++)str[i] = other.str[i];
+		cout << "MoveAssignment:\t\t" << this << endl;
+		other.str = nullptr;
+		return *this;
+	}
 };
 String operator+(const String& str1, const String& str2);
 std::ostream& operator << (std::ostream& os, const String& obj);
 void main()
 {
 #define checking
-
-#ifdef checking
+#ifdef checking1
 	setlocale(LC_ALL, "Russian");
 	String str1 = "Hello";
 	String str2 = "World";
@@ -83,6 +99,9 @@ void main()
 	cout << str2 << endl;
 	cout << str << endl;
 #endif 
+	String str1;
+	str1 = String("Ok");
+	cout << str1 << endl;
 }
 std::ostream& operator << (std::ostream& os, const String& obj)
 {
