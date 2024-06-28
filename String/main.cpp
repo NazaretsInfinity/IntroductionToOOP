@@ -100,8 +100,9 @@ void main()
 	cout << str << endl;
 #endif 
 	String str1;
-	str1 = String("Ok");
-	cout << str1 << endl;
+	str1 = String("Hey Ho,");
+	String str2 = String(" Let's Go");
+	cout << str1 << str2 << endl;
 }
 std::ostream& operator << (std::ostream& os, const String& obj)
 {
